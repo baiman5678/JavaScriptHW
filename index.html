@@ -71,10 +71,8 @@
         let li = this.parentElement;
         let currentText = li.firstChild.textContent;
         
-        // 清除 li 的內容，並創建一個新的輸入框
         li.innerHTML = `<input class="change" type="text" value="${currentText}">`;
         
-        // 獲取輸入框元素
         let input = li.querySelector('.change');
         
         // 當按下 Enter 鍵時，將輸入框的值保存回 li
