@@ -254,21 +254,24 @@ RandomPrint();
 // 有一字串陣列內容如下，請統計並印出陣列內每個字母各有幾個，EX: a: 4c: 2
 console.log("d")
  const mySkills = ['javascript', 'java', 'sql', 'c', 'python', 'php', 'swift'];
- const letterCount = {};
+let arr = mySkills.join('');
 
- // 遍歷 mySkills 陣列中的每個字串
- mySkills.forEach(skill => {
-     // 將每個技能字串轉換為小寫，並遍歷其中的每個字母
-     skill.toLowerCase().split('').forEach(letter => {
-         // 如果這個字母已經在 letterCount 對象中，則將其計數加 1；否則初始化計數為 1
-         letterCount[letter] = (letterCount[letter] || 0) + 1;
-     });
- });
- 
- // 輸出結果
- for (let letter in letterCount) {
-     console.log(`${letter}: ${letterCount[letter]}`);
- }
+function Count(input) {
+    let Count ={}
+    for(let i in input){
+        if(input[i] in Count)
+            { 
+            Count[input[i]]++}
+        else{
+            let object ={}
+            object[input[i]]=1
+            result = Object.assign(Count,object)
+
+        }
+    }
+    return result
+}
+console.log(Count(arr))
 //請宣告一個二維陣列，並用巢狀for迴圈將值放入陣列內。結果如下:
 [
     [ 18, 27, 36, 45, 54, 63, 72, 81 ],
