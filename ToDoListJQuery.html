@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/jquery-3.7.1.js"></script>
+    <style>
+        body{
+            margin: auto;
+            padding: auto;
+            text-align: center;
+        }
+        div{
+
+            padding-top: 20px;
+            margin: auto;
+            width: 500px;
+        }
+        h1{
+            display: inline-block;
+        }
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+        .orange{
+            color:orange;
+        }
+        ul{
+            list-style: none;
+        }
+        li {
+            text-align: left;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .ch1{
+            display: inline
+        }
+        .delall{
+            margin-left: 120px;
+        }
+        .btDel{
+            position: absolute;
+            right: 50px;
+        }
+        .btEdit{
+            position: absolute;
+            right: 0;
+        }
+
+
+    </style>
+</head>
+<body >
+<div>
+    <h1 class="red">TO</h1>
+    <h1 class="green"> DO</h1>
+    <h1 class="orange"> LIST</h1>
+</div>
+    <div class="ch1">
+        <input type="checkbox" class="selectAll">
+        <p class="ch1">全選</p> 
+        <button class="delSelect">選擇刪除</button>
+
+    </div>
+<div>
+
+    <input type="text" id = "delText">
+    
+    <button id = "btn">新增</button>
+    <ul class="ulAll">
+
+    </ul>
+
+</div>
+
+
+</body>
+<script>
+
+//當你按下新增鍵時
+$(document).ready(function(){
+    let btnadd =  $("#btn");
+   btnadd.click(function(){
+    let strinput =  $("#delText").val();
+    if(strinput !=='')
+    {    //創造一個新的li
+    let newli = $("ul").append('<li>'+ '<input type="checkbox" class="select">'+strinput+'<button class=btDel>刪除</button>'+'<button class =btEdit>編輯</button>'+'</li>');
+    //新增刪除功能
+    let  BtDEL = $("[class = btDel]").click(function(){
+        $(this).parent().remove()
+    });
+        //新增編輯功能
+    let  btEdit = $("[class = btEdit]").click(function(){
+        let inputCh= $(this).parent().replaceWith('<input class="change" type="text">')
+        $("[class=change]").on("keypress",function(e){
+            if(e.which ===13){
+                let inputtxt = $("[class=change]").val();
+                $(this).replaceWith('<li>'+ '<input type="checkbox" class="select">'+inputtxt+'<button class=btDel>刪除</button>'+'<button class =btEdit>編輯</button>'+'</li>')
+            }});
+        });
+    }});
+    //全選
+    let selectAll = $("[class=selectAll]").click(function(){
+
+
+        if($("[class=selectAll]").prop("checked")){
+            $("[class=select]").each(function(){
+                $(this).prop("checked",true);
+        });
+        }
+        else {
+            $("[class=select]").each(function(){
+                $(this).prop("checked",false);
+        });}
+
+
+    })
+
+      //按下選擇刪除時
+
+
+      $("[class=delSelect]").click(function(){
+        let sTure = $("[class=select]:checked").each(function(){
+            $(this).val();
+        })
+
+        if(sTure){
+            sTure.parent("li").remove()
+        };
+
+
+
+      });
+
+
+
+
+
+
+
+});
+
+
+
+
+</script>
